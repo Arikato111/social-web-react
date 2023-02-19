@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-zinc-100 min-h-screen;
+    }
+}
+
+@layer components {
+    .row {
+        @apply block sm:grid grid-cols-12 gap-0;
+    }
+    .menu a:active {
+        @apply bg-zinc-100;
+    } 
+    .frame {
+        @apply mx-3 lg:mx-80;
+    }
+    .input-text {
+        @apply bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-300 border focus:border-blue-400 border-zinc-400/70 rounded-lg  w-full p-2 mb-3;
+    }
+    .input-label {
+        @apply min-w-fit py-2 px-3 mb-3 mr-1 bg-zinc-200 rounded-lg;
+    }
+    .form-control {
+        @apply bg-white rounded-md drop-shadow-md p-5 my-5 shadow-zinc-300 fill-none;
+    }
+    .form-control-group {
+        @apply mx-3 py-2 px-3 flex flex-row justify-center items-baseline bg-white rounded-md drop-shadow-md p-5 my-5 shadow-zinc-300 fill-none;
+    }
+    .primary {
+        @apply text-white mx-1 bg-blue-600 hover:bg-blue-700 border-none;
+    }
+    .danger {
+        @apply text-white mx-1 bg-rose-600 hover:bg-rose-700 border-none;
+    }
+
+    .nav-item {
+        @apply block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-zinc-300 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700;
+    }
+    .heading {
+        @apply text-zinc-700 text-center text-3xl p-3 bg-white mt-5 drop-shadow shadow-zinc-300 rounded-lg;
+    }
+    .menu-aside {
+        @apply sm:sticky sm:top-16 sm:h-[90vh] sm:overflow-y-auto  mt-3 sm:mt-0 overflow-x-auto ;
+    }
+    .menu-nav {
+        @apply text-zinc-800 px-5 sm:mt-3 min-w-max overflow-x-auto;
+    }
+    .menu-item {
+        @apply text-center mx-1 bg-white sm:m-3 p-3 text-lg rounded-lg shadow inline-block sm:block hover:bg-gray-50;
+    }
+    .btn-dark {
+        @apply text-white;
+    }
+}
