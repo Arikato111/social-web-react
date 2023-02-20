@@ -2,7 +2,7 @@ import { FC } from "react";
 import axios from "axios";
 import ProfileBar from "../components/ProfileBar";
 import { useState, useEffect } from "react";
-
+import NavContact from "../components/NavContact";
 interface User {
     usr_address: string;
     usr_date: string;
@@ -52,7 +52,7 @@ const PeoplePage: FC = () => {
                 </div>
             </div>
             <div className="col-span-3">
-                {/*?php import('./components/NavContact'); ?*/}
+                <NavContact />
             </div>
         </div>
     </main >
