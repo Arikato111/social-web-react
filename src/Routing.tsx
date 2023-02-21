@@ -9,6 +9,7 @@ import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import PeoplePage from "./pages/People";
 import { apiUrl } from './config'
+import ExplorePage from "./pages/Explore";
 
 axios.defaults.baseURL = apiUrl
 
@@ -16,6 +17,7 @@ const Routing: FC = () => {
   return <Router>
     <Navbar />
     <Routes>
+      <Route path="/explore" element={<ExplorePage />} />
       <Route path="/people" element={<PeoplePage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />

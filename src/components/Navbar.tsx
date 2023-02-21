@@ -23,12 +23,15 @@ const Navbar: FC = () => {
             <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                 <ul className="flex flex-col p-2 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     {/*?php if (isset($_SESSION['usr'])) : ?*/}
-                    <li>
-                        <Link to="/home" data-title="หน้าหลัก" className="<?php checkPath('/home'); ?> nav-item">
-                            <img className="w-7 sm:w-10 inline-block" src="/icons/home.svg" alt="home" />
-                            <span className="sm:hidden">หน้าหลัก</span>
-                        </Link>
-                    </li>
+                    {/* hide home */}
+                    {false &&
+                        <li>
+                            <Link to="/home" data-title="หน้าหลัก" className="<?php checkPath('/home'); ?> nav-item">
+                                <img className="w-7 sm:w-10 inline-block" src="/icons/home.svg" alt="home" />
+                                <span className="sm:hidden">หน้าหลัก</span>
+                            </Link>
+                        </li>
+                    }
                     {/*?php endif; ?*/}
                     <li>
                         <Link to="/explore/" data-title="สำรวจ" className="<?php checkPath('/explore/'); ?> nav-item">
