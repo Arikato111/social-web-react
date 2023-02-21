@@ -1,33 +1,26 @@
 import { FC } from "react";
-import axios from "axios";
 import ProfileBar from "../components/ProfileBar";
 import { useState, useEffect } from "react";
 import NavContact from "../components/NavContact";
-interface User {
-    usr_address: string;
-    usr_date: string;
-    usr_email: string;
-    usr_img: string;
-    usr_name: string;
-    usr_regis_date: string;
-    usr_tel: string;
-    usr_username: string;
-    usr_view: number;
-}
+import { useSelector } from "react-redux";
+import { fetchPeopleApi, peopleSelector } from "../store/slices/peopleSlice";
+import { useAppDispatch } from "../store/store";
+import { User } from "../store/slices/peopleSlice";
 
 const PeoplePage: FC = () => {
-    const [allUsers, setAllUsers] = useState<Array<User>>([])
     const [searchUsers, setSearchUsers] = useState("")
+
+    const peopleReducer = useSelector(peopleSelector);
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
-        (async function () {
-            let users = await axios.get('/api/users')
-            setAllUsers(users.data)
-        })()
+        dispatch(fetchPeopleApi())
     }, [])
 
+
     let UsersSearch: Array<User> = []
-    if (allUsers.length > 0) {
-        UsersSearch = allUsers.filter((data) => data.usr_name.includes(searchUsers) || data.usr_username.includes(searchUsers))
+    if (peopleReducer.users.length > 0) {
+        UsersSearch = peopleReducer.users.filter((data) => data.usr_name.toLowerCase().includes(searchUsers.toLowerCase()) || data.usr_username.toLowerCase().includes(searchUsers.toLowerCase()))
     }
 
     return <main>
@@ -43,11 +36,12 @@ const PeoplePage: FC = () => {
                 <div className="mx-3">
                     {UsersSearch.length > 0 ?
                         UsersSearch.map((usr, idx) => {
-                            console.log(idx)
                             return <ProfileBar key={idx} name={usr.usr_name} username={usr.usr_username} img={usr.usr_img} />
                         })
-                        :
-                        <div className="heading">ไม่พบผู้ใช้งาน</div>
+                        : (peopleReducer.isLoading ? <div className="heading">กำลังโหลด</div>
+                            :
+                            <div className="heading">ไม่พบผู้ใช้งาน</div>
+                        )
                     }
                 </div>
             </div>
