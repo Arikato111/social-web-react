@@ -10,6 +10,14 @@ export type ExplorePost = {
   post_cat_id: number;
   post_img: string;
   post_view: number;
+
+  usr_username: string;
+  usr_name: string;
+  usr_img: string;
+
+  cat_id: number;
+  cat_name: string;
+  cat_path: string;
 };
 
 type ExploreState = {

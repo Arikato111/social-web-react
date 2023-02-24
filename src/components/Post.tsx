@@ -5,16 +5,13 @@ import { useSelector } from "react-redux";
 import { peopleSelector } from "../store/slices/peopleSlice";
 import { Link } from "react-router-dom";
 
-const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, post_img, post_usr_id, post_view }) => {
-    const peopleReducer = useSelector(peopleSelector);
-    // future find user info with id | but api is not support yet.
-    // const user = peopleReducer.users.filter((people)=> people.)
+const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, post_img, post_usr_id, post_view, cat_name, usr_img,usr_name, usr_username }) => {
 
     useEffect(() => {
         document.title = "สำรวจ | aden"
     }, [])
     return <div className="mb-3 mx-3 bg-white rounded-lg shadow py-3 text-zinc-800">
-        <div className="text-end px-3">
+        {/* <div className="text-end px-3">
             <button id="dropdownPost" data-dropdown-toggle="dropdownpost" className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
                 <span className="sr-only">Open dropdown</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -31,17 +28,17 @@ const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, p
                     </li>
                 </ul>
             </form>
-        </div>
+        </div> */}
 
         <div className="flex items-center px-3">
             <div>
-                <img className="w-9 h-9 rounded-full object-cover inline-block" src={`${apiUrl}/public/profile/${post_usr_id}`} onError={(e) => {
+                <img className="w-9 h-9 rounded-full object-cover inline-block" src={`${apiUrl}/public/profile/${usr_img}`} onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src = '/default/post.png'
                 }} alt="profile image" />
             </div>
             <div className="px-3">
-                <Link className="hover:underline" to="/#:username">#:username</Link>
+                <Link className="hover:underline" to={`/${usr_username}`}>{usr_username}</Link>
                 <div className="text-gray-500 text-sm">โพสต์เมื่อ {post_date} ⦁ ความรู้</div>
             </div>
         </div>
@@ -59,7 +56,7 @@ const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, p
             <span className="float-right">
                 1 ความคิดเห็น
                 <span className="mx-3">
-                    608 รับชม
+                    {post_view} รับชม
                 </span>
             </span>
         </div>
