@@ -39,7 +39,7 @@ const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, p
             </div>
             <div className="px-3">
                 <Link className="hover:underline" to={`/${usr_username}`}>{usr_username}</Link>
-                <div className="text-gray-500 text-sm">โพสต์เมื่อ {post_date} ⦁ ความรู้</div>
+                <div className="text-gray-500 text-sm">โพสต์เมื่อ {post_date} ⦁ {cat_name}</div>
             </div>
         </div>
         <pre className="whitespace-pre-wrap break-words my-3 px-3 max-h-[500px] overflow-y-auto">{post_detail}</pre>
