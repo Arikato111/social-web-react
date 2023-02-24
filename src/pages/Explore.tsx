@@ -5,13 +5,19 @@ import { useAppDispatch } from "../store/store";
 import NavContact from "../components/NavContact";
 import Post from "../components/Post";
 import NavExplore from "../components/explore/Nav";
+import { useParams } from "react-router-dom";
 
-const ExplorePage: FC = () => {
+interface ExploreCat {
+    cat?: string | null;
+}
+const ExplorePage: FC<ExploreCat> = () => {
     const dispatch = useAppDispatch();
     const exploreReducer = useSelector(exploreSelector)
+
+    let { cat } = useParams();
     useEffect(() => {
-        dispatch(fetchExploreApi())
-    }, [])
+        dispatch(fetchExploreApi(cat ?? ""))
+    }, [cat])
     return <main className="py-3">
         <div className="row">
             <div className="col-span-3">

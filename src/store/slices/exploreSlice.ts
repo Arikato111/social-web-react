@@ -32,8 +32,13 @@ const initialValues: ExploreState = {
 
 export const fetchExploreApi = createAsyncThunk(
   "Explore/fetchApi",
-  async () => {
-    let res = await axios.get("/api/explore");
+  async (cat: string | null) => {
+    let res;
+    if (cat ?? false) {
+      res = await axios.get(`/api/explore?cat=${cat}`);
+    } else {
+      res = await axios.get("/api/explore");
+    }
     return res.data;
   }
 );

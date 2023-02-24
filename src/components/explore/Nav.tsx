@@ -17,21 +17,25 @@ const NavExplore: FC = () => {
         let res = await axios.get('/api/category');
         setCat(res.data)
     }
+    const scrollToTop = () => {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
 
     useEffect(() => {
         fetchCatApi();
     }, [])
     return <div className="menu-aside">
         <aside className="menu-nav">
-            <Link to="/explore/" className="menu-item">
+            <Link to="/explore/" className="menu-item" onClick={scrollToTop}>
                 <img className="inline-block w-7 h-7" onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.style.display = 'none'
-                }} src="/public/default/all-icon.svg" alt={'all-category'} />
+                }} src="/default/all-icon.svg" alt={'all-category'} />
                 {" "}ทั้งหมด</Link>
 
             {cat.map((c) => {
-                return <Link to={`/explore/${c.cat_path}`} className="menu-item">
+                return <Link to={`/explore/${c.cat_path}`} className="menu-item" onClick={scrollToTop}>
                     <img className="inline-block w-7 h-7" onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.style.display = 'none'
