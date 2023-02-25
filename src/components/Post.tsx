@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
 
 const Post: FC<ExplorePost> = ({ post_cat_id, post_date, post_detail, post_id, post_img, post_usr_id, post_view, cat_name, usr_img,usr_name, usr_username }) => {
 
-    useEffect(() => {
-        document.title = "สำรวจ | aden"
-    }, [])
     return <div className="mb-3 mx-3 bg-white rounded-lg shadow py-3 text-zinc-800">
         {/* <div className="text-end px-3">
             <button id="dropdownPost" data-dropdown-toggle="dropdownpost" className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">

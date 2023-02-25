@@ -16,8 +16,14 @@ const ExplorePage: FC<ExploreCat> = () => {
 
     let { cat } = useParams();
     useEffect(() => {
+        if (cat ?? false) {
+            document.title = `สำรวจ | ${cat} | aden`
+        } else {
+            document.title = "สำรวจ | aden"
+        }
         dispatch(fetchExploreApi(cat ?? ""))
     }, [cat])
+
     return <main className="py-3">
         <div className="row">
             <div className="col-span-3">
