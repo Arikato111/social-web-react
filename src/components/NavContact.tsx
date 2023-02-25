@@ -42,11 +42,11 @@ const NavContact: FC = () => {
             ⦁ แนวทางการใช้แบรนด์ aden
             ⦁ aden เพื่อธุรกิจ
             ⦁ ไทย
-            {(SPONSOR_URL ?? false) ? "" :
+            {(SPONSOR_URL &&
                 <>
                     ⦁ <a className="hover:underline hover:text-blue-600" href={SPONSOR_URL}>สนับสนุน</a>
                 </>
-            }
+            )}
             ⦁ <a target="_blank" className="hover:underline hover:text-blue-600" href="https://github.com/Arikato111/social-web-react">open source</a>
 
         </div>
