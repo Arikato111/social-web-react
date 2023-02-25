@@ -1,30 +1,25 @@
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { apiUrl } from "../../config";
-
-interface CategoryNav {
-    cat_id: number;
-    cat_name: string;
-    cat_path: string;
-    cat_img: string;
-}
+import { useAppDispatch } from "../../store/store";
+import { useSelector } from "react-redux";
+import { categorySelector, loadCategoryApi } from "../../store/slices/categorySlice";
 
 const NavExplore: FC = () => {
-    const [cat, setCat] = useState<Array<CategoryNav>>([]);
+    const dispatch = useAppDispatch();
+    const categoryReducer = useSelector(categorySelector)
 
-    const fetchCatApi = async () => {
-        let res = await axios.get('/api/category');
-        setCat(res.data)
-    }
+    useEffect(() => {
+        if (categoryReducer.cate.length === 0) {
+            dispatch(loadCategoryApi())
+        }
+    }, [])
+
     const scrollToTop = () => {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
-    useEffect(() => {
-        fetchCatApi();
-    }, [])
     return <div className="menu-aside">
         <aside className="menu-nav">
             <Link to="/explore/" className="menu-item" onClick={scrollToTop}>
@@ -34,7 +29,7 @@ const NavExplore: FC = () => {
                 }} src="/default/all-icon.svg" alt={'all-category'} />
                 {" "}ทั้งหมด</Link>
 
-            {cat.map((c) => {
+            {categoryReducer.cate.map((c) => {
                 return <Link to={`/explore/${c.cat_path}`} className="menu-item" onClick={scrollToTop}>
                     <img className="inline-block w-7 h-7" onError={(e) => {
                         e.currentTarget.onerror = null;

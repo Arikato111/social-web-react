@@ -2,8 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import PeopleReducer from "./slices/peopleSlice";
 import exploreReducer from "./slices/exploreSlice";
+import categoryReducer from "./slices/categorySlice";
 
-const reducer = { PeopleReducer, exploreReducer };
+const reducer = { PeopleReducer, exploreReducer, categoryReducer };
 
 export const store = configureStore({
   reducer,
