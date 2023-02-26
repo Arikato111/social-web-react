@@ -3,8 +3,14 @@ import { useDispatch } from "react-redux";
 import PeopleReducer from "./slices/peopleSlice";
 import exploreReducer from "./slices/exploreSlice";
 import categoryReducer from "./slices/categorySlice";
+import userLoginReducer from "./slices/userLoginSlice";
 
-const reducer = { PeopleReducer, exploreReducer, categoryReducer };
+const reducer = {
+  userLoginReducer,
+  PeopleReducer,
+  exploreReducer,
+  categoryReducer,
+};
 
 export const store = configureStore({
   reducer,

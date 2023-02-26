@@ -1,20 +1,67 @@
-import { FC, FormEvent, useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { FC, FormEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { loadCheckLogin, userLoginSelector } from "../store/slices/userLoginSlice";
+import { useAppDispatch } from "../store/store";
 
 const LoginPage: FC = () => {
+    // check login status
+    const userLoginReducer = useSelector(userLoginSelector)
+
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const [userAlert, setUserAlert] = useState(false)
+    const [passAlert, setPassAlert] = useState(false)
+
+    let userReg = /[^a-z0-9]/
+
     useEffect(() => {
         document.title = "เข้าสู่ระบบ | aden"
     })
+    const dispatch = useAppDispatch();
 
-    const SubmitForm = (e: FormEvent<HTMLFormElement>) => {
+    const SubmitForm = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        alert("ระบบสมัครสมาชิกยังไม่พร้อม");
+        const formData = new FormData(e.currentTarget)
+        let res = await axios.post('/api/login', formData)
+        if (res.data.status === 1) {
+            Cookies.set('token1', res.data.token1)
+            Cookies.set('token2', res.data.token2)
+            dispatch(loadCheckLogin())
+        } else {
+            console.warn('register faild')
+        }
+    }
+
+    if (userLoginReducer.isLogin) {
+        return <main className="frame">
+            <div className="heading">คุณเข้าสู่ระบบแล้ว</div>
+        </main>
     }
     return <main className="frame">
         <h3 className="heading">เข้าสู่ระบบ</h3>
         <form onSubmit={SubmitForm} className="form-control" method="post">
-            <input name="usr_username" className="input-text" placeholder="ชื่อผู้ใช้" maxLength={50} size={50} type="text" required />
-            <input name="usr_password" className="input-text" type="password" placeholder="รหัสผ่าน" required />
+            <input style={{ border: userAlert ? "red 1px solid" : "" }} name="username" className="input-text" placeholder="ชื่อผู้ใช้" maxLength={50} size={50} type="text" required
+                value={username} onChange={(e) => {
+                    if (userReg.test(e.target.value)) setUserAlert(true);
+                    else {
+                        setUserAlert(false)
+                        setUsername(e.target.value)
+                    }
+                }} />
+            <input style={{ border: passAlert ? "red 1px solid" : "" }} name="password" className="input-text" type="password" placeholder="รหัสผ่าน" required
+                value={password} onChange={(e) => {
+                    if (e.target.value.length < 1) {
+                        setPassAlert(true)
+                    } else {
+                        setPassAlert(false)
+                    }
+                    setPassword(e.target.value)
+                }} />
             <div className="text-right">
                 <button name="login" className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-md ">เข้าสู่ระบบ</button>
             </div>

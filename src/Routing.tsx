@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home";
@@ -11,10 +11,14 @@ import PeoplePage from "./pages/People";
 import { apiUrl } from './config'
 import ExplorePage from "./pages/Explore";
 import './app.css';
+import { useAppDispatch } from "./store/store";
+import { loadCheckLogin } from "./store/slices/userLoginSlice";
 
 axios.defaults.baseURL = apiUrl
 
 const Routing: FC = () => {
+  const dispatch = useAppDispatch();
+  dispatch(loadCheckLogin())
   return <Router>
     <Navbar />
     <Routes>
