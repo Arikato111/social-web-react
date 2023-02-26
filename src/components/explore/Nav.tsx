@@ -29,8 +29,8 @@ const NavExplore: FC = () => {
                 }} src="/default/all-icon.svg" alt={'all-category'} />
                 {" "}ทั้งหมด</Link>
 
-            {categoryReducer.cate.map((c) => {
-                return <Link to={`/explore/${c.cat_path}`} className="menu-item" onClick={scrollToTop}>
+            {categoryReducer.cate.map((c, idx) => {
+                return <Link key={idx} to={`/explore/${c.cat_path}`} className="menu-item" onClick={scrollToTop}>
                     <img className="inline-block w-7 h-7" onError={(e) => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.style.display = 'none'

@@ -6,6 +6,7 @@ import NavContact from "../components/NavContact";
 import Post from "../components/Post";
 import NavExplore from "../components/explore/Nav";
 import { useParams } from "react-router-dom";
+import { categorySelector } from "../store/slices/categorySlice";
 
 interface ExploreCat {
     cat?: string | null;
@@ -13,11 +14,17 @@ interface ExploreCat {
 const ExplorePage: FC<ExploreCat> = () => {
     const dispatch = useAppDispatch();
     const exploreReducer = useSelector(exploreSelector)
+    const categoryReducer = useSelector(categorySelector)
 
     let { cat } = useParams();
     useEffect(() => {
         if (cat ?? false) {
-            document.title = `สำรวจ | ${cat} | aden`
+            let findCate = categoryReducer.cate.filter(data => data.cat_path === cat)
+            if (findCate.length > 0) {
+                document.title = `สำรวจ | ${findCate[0].cat_name} | aden`
+            } else {
+                document.title = `สำรวจ | ${cat} | aden`
+            }
         } else {
             document.title = "สำรวจ | aden"
         }
@@ -31,8 +38,8 @@ const ExplorePage: FC<ExploreCat> = () => {
             </div>
             <div className="col-span-6 mt-5">
                 {exploreReducer.explore.length > 0 ?
-                    exploreReducer.explore.map((post) => {
-                        return <Post {...post} />
+                    exploreReducer.explore.map((post, idx) => {
+                        return <Post key={idx} {...post} />
                     })
                     : ""}
             </div>
