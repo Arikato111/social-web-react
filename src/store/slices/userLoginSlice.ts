@@ -33,12 +33,10 @@ export const loadCheckLogin = createAsyncThunk(
     let token2 = Cookies.get("token2");
     if (token1 && token2) {
       console.log("send api");
-      let res = await axios.get("/api/token", {
-        headers: {
-          token1,
-          token2,
-        },
-      });
+      const formData = new FormData();
+      formData.append("token1", token1);
+      formData.append("token2", token2);
+      let res = await axios.post("/api/token", formData);
       if (res.data.status === 1) {
         return res.data.usr;
       }
