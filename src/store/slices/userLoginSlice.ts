@@ -32,7 +32,13 @@ export const loadCheckLogin = createAsyncThunk(
     let token1 = Cookies.get("token1");
     let token2 = Cookies.get("token2");
     if (token1 && token2) {
-      let res = await axios.get("/api/token", { headers: { token1, token2 } });
+      console.log("send api");
+      let res = await axios.get("/api/token", {
+        headers: {
+          token1,
+          token2,
+        },
+      });
       if (res.data.status === 1) {
         return res.data.usr;
       }
@@ -48,8 +54,15 @@ const userLoginSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(loadCheckLogin.fulfilled, (state, action) => {
       if (action.payload) {
+        console.log(action.payload);
         state.usr = action.payload;
         state.isLogin = true;
+      } else {
+        state.isLogin = false;
+        console.warn("login faild");
+        state.usr = {};
+        Cookies.remove("token1");
+        Cookies.remove("token2");
       }
     });
   },

@@ -18,7 +18,9 @@ axios.defaults.baseURL = apiUrl
 
 const Routing: FC = () => {
   const dispatch = useAppDispatch();
-  dispatch(loadCheckLogin())
+  useEffect(() => {
+    dispatch(loadCheckLogin())
+  }, [])
   return <Router>
     <Navbar />
     <Routes>
