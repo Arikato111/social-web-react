@@ -14,7 +14,8 @@ const PeoplePage: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchPeopleApi())
+        document.title = "ผู้คน | aden";
+        dispatch(fetchPeopleApi());
     }, [])
 
 

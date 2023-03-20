@@ -13,6 +13,7 @@ import ExplorePage from "./pages/Explore";
 import './app.css';
 import { useAppDispatch } from "./store/store";
 import { loadCheckLogin } from "./store/slices/userLoginSlice";
+import LogoutPage from "./pages/Logout";
 
 axios.defaults.baseURL = apiUrl
 
@@ -24,6 +25,7 @@ const Routing: FC = () => {
   return <Router>
     <Navbar />
     <Routes>
+      <Route path="/logout" element={<LogoutPage />} />
       <Route path="/explore/:cat" element={<ExplorePage />} />
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/people" element={<PeoplePage />} />

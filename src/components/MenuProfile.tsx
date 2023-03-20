@@ -20,13 +20,13 @@ const MenuProflie: FC = () => {
             </div>
             <ul className="py-1" aria-labelledby="user-menu-button">
                 <li>
-                    <a href="/create-post" className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white text-blue-600">+ สร้างโพสต์</a>
+                    <Link to="/create-post" className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white text-blue-600">+ สร้างโพสต์</Link>
                 </li>
                 <li>
-                    <a href="/<?php echo $usr_nav['usr_username']; ?>" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">โปรไฟล์</a>
+                    <Link to={`/${userLoginReducer.usr.usr_username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">โปรไฟล์</Link>
                 </li>
                 <li>
-                    <a onClick={() => confirm('ยืนยันการออกจากระบบ')} href="/login?logout" className="block px-4 py-2 text-sm text-rose-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">ออกจากระบบ</a>
+                    <Link onClick={() => confirm('ยืนยันการออกจากระบบ')} to="/logout" className="block px-4 py-2 text-sm text-rose-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">ออกจากระบบ</Link>
                 </li>
             </ul>
         </div>

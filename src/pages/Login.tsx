@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { FC, FormEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { loadCheckLogin, userLoginSelector } from "../store/slices/userLoginSlice";
 import { useAppDispatch } from "../store/store";
 
@@ -33,14 +33,12 @@ const LoginPage: FC = () => {
             Cookies.set('token2', res.data.token2)
             dispatch(loadCheckLogin())
         } else {
-            console.warn('register faild')
+            console.warn('login faild')
         }
     }
 
     if (userLoginReducer.isLogin) {
-        return <main className="frame">
-            <div className="heading">คุณเข้าสู่ระบบแล้ว</div>
-        </main>
+        return <Navigate to={'/home'} />
     }
     return <main className="frame">
         <h3 className="heading">เข้าสู่ระบบ</h3>

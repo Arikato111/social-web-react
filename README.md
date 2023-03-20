@@ -21,6 +21,13 @@ this is Front-end to working with [social-web-php](https://github.com/Arikato111
 - react-router-dom
 - daisyui
 
+## Need to know
+
+- api method use only GET and POST; 
+- if use [POST, PUT, DELETE] must assign method with params in url : example `/api/user?method=delete`
+- because server api has error with PUT, POST, and others method
+- sending data to api must use with FormData
+
 ## TODOs
 
 - [ ] work with [social-web-php](https://github.com/Arikato111/social-web-php)
